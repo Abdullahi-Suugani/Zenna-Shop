@@ -25,6 +25,11 @@
 
 // }
 // ];
+
+
+
+// muhii mada aan ka laha codekan javasctpt
+// the main idea of javascript 1. save the data 2. generate the HTML 3. make it interactive 
 let productsHTML ='';
 
 products.forEach(products =>{
