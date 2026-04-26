@@ -1,5 +1,7 @@
 import {cart, addToCart} from '../data/cart.js'; 
 import {products} from '../data/products.js';
+import {formatCurrency} from './utils/money.js';
+
 // muhii mada aan ka laha codekan javasctpt
 // the main idea of javascript 1. save the data 2. generate the HTML 3. make it interactive 
 
@@ -29,7 +31,7 @@ productsHTML += `
           </div>
 
           <div class="product-price">
-            $${products.priceCents/100}
+            $${formatCurrency(products.priceCents)}
           </div>
 
           <div class="product-quantity-container">
