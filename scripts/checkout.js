@@ -1,4 +1,4 @@
-import { cart, clearCart } from "../data/cart.js";
+import { cart, removeFromCart} from "../data/cart.js";
 import {products} from "../data/products.js";
 import { formatCurrency } from './utils/money.js'; 
 
@@ -47,7 +47,7 @@ cartSummaryHTML += ` <div class="cart-item-container">
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                     Delete
                   </span>
                 </div>
@@ -107,20 +107,37 @@ cartSummaryHTML += ` <div class="cart-item-container">
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
-const totalItems = cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
 
-const returnToHomeLink = document.querySelector('.return-to-home-link');
-if (returnToHomeLink) {
-  returnToHomeLink.textContent = `${totalItems} items`;
-}
+document.querySelectorAll('.js-delete-link')
+.forEach((link)=>{
+  link.addEventListener('click',()=>{
+    
+    const productId = link.dataset.productId;
+    removeFromCart(productId);
+    
+  
 
-const itemsSummaryLabel = document.querySelector('.payment-summary-row div');
-if (itemsSummaryLabel) {
-  itemsSummaryLabel.textContent = `Items (${totalItems}):`;
-}
+    
 
-document.querySelector('.place-order-button').addEventListener('click', () => {
-  clearCart();
-  window.location.href = 'orders.html';
-});
+    
+  })
+})
+
+
+// const totalItems = cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
+
+// const returnToHomeLink = document.querySelector('.return-to-home-link');
+// if (returnToHomeLink) {
+//   returnToHomeLink.textContent = `${totalItems} items`;
+// }
+
+// const itemsSummaryLabel = document.querySelector('.payment-summary-row div');
+// if (itemsSummaryLabel) {
+//   itemsSummaryLabel.textContent = `Items (${totalItems}):`;
+// }
+
+// document.querySelector('.place-order-button').addEventListener('click', () => {
+//   clearCart();
+//   window.location.href = 'orders.html';
+// });
 
