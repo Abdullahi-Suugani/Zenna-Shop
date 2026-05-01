@@ -3,7 +3,7 @@ import {products} from "../data/products.js";
 import { formatCurrency } from './utils/money.js'; 
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import {} from '../data/deliveryOptions.js';
+import { deliveryOptions } from '../data/deliveryOptions.js';
 hello();
 
 
@@ -34,12 +34,16 @@ if (!matchingProduct) {
   return;
 }
 
-const deliveryOption = cartItem.deliveryOptionId;
+const deliveryOptionId = cartItem.deliveryOptionId || cartItem.deliveryOptionsId || '1';
 let deliveryOption;
 deliveryOptions.forEach((option)=>{
-  if(option.id === deliveryOptionId)
+  if(option.id === deliveryOptionId) {
     deliveryOption = option;
+  }
 });
+if (!deliveryOption) {
+  return;
+}
  const today = dayjs();
     const deliveryDate = today.add(deliveryOption.deliveryDays,'days');
     const dateString = deliveryDate.format(
@@ -81,7 +85,7 @@ js-cart-item-container-${matchingProduct.id}" >
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
-                ${deliveryOptionsHTML(matchingProduct, cartItem)}
+                ${deliveryOptionsHtml(matchingProduct, cartItem)}
 
               </div>
             </div>
@@ -89,7 +93,7 @@ js-cart-item-container-${matchingProduct.id}" >
           
 `;
 });
-function deleviryOptionsHTML(matchingProduct, cartItem){
+function deliveryOptionsHtml(matchingProduct, cartItem){
 let html = '';
 
   deliveryOptions.forEach((deliveryOption)=>{
@@ -100,11 +104,13 @@ let html = '';
       'dddd, MMMM D'
     );
 
-    const priceSting = deliveryOption.priceCents === 0
+    const priceCents = deliveryOption.priceCents ?? deliveryOption.pricenCents ?? 0;
+    const priceSting = priceCents === 0
     ? 'FREE Shipping'
-    : `$${formatCurrency(deliveryOption.priceCents)} -`;
+    : `$${formatCurrency(priceCents)} -`;
     
-    const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
+    const selectedOptionId = cartItem.deliveryOptionId || cartItem.deliveryOptionsId || '1';
+    const isChecked = deliveryOption.id === selectedOptionId;
 
     html +=`<div class="delivery-option js-delivery-option" 
     data-product-id="${matchingProduct.id}"
@@ -118,7 +124,7 @@ let html = '';
                       ${dateString}
                     </div>
                     <div class="delivery-option-price">
-                      ${priceSting} hipping
+                      ${priceSting} Shipping
                     </div>
                   </div>
                 </div>
