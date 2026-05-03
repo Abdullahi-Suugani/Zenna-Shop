@@ -12,6 +12,8 @@ const delevereyDate = today.add(7, 'day');
 delevereyDate.format('dddd, MMMM D');
 console.log(delevereyDate.format('dddd, MMMM D'));
 
+function renderOderSummary() {
+
 function updateCartQuantity() {
   const cartQuantity = calculateCartQuantity();
 
@@ -201,8 +203,12 @@ document.querySelectorAll('.js-delivery-option').forEach((element)=>{
     const {productId, deliveryOptionId} = element.dataset;
 
    updateDeliveryOption(productId, deliveryOptionId);
-  })
-})
+   renderOderSummary();
+
+  });
+});
+}
+renderOderSummary();
 
 
 
