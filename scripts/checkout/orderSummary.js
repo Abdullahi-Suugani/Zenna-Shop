@@ -1,10 +1,10 @@
 
 import { cart, removeFromCart, updateDeliveryOption, calculateCartQuantity, updateQuantity } from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import {products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 hello();
 
 
@@ -32,29 +32,36 @@ let cartSummaryHTML = '';
 
 
 cart.forEach((cartItem)=> {
-let matchingProduct;
+  const productId = cartItem.productId;
+const  matchingProduct = getProduct(productId);
 
-products.forEach((product)=>{
-  if (product.id === cartItem.productId){
-    matchingProduct = product;
-  }
+
+
+// products.forEach((product)=>{
+//   if (product.id === cartItem.productId){
+//     matchingProduct = product;
+//   }
  
-});
+// });
 
-if (!matchingProduct) {
-  return;
-}
+// if (!matchingProduct) {
+//   return;
+// }
 
-const deliveryOptionId = cartItem.deliveryOptionId || cartItem.deliveryOptionsId || '1';
-let deliveryOption;
-deliveryOptions.forEach((option)=>{
-  if(option.id === deliveryOptionId) {
-    deliveryOption = option;
-  }
-});
-if (!deliveryOption) {
-  return;
-}
+const deliveryOptionId = cartItem.deliveryOptionId;
+const deliveryOption = getDeliveryOption(deliveryOptionId);
+// let deliveryOption;
+
+// deliveryOptions.forEach((option)=>{
+//   if(option.id === deliveryOptionId) {
+//     deliveryOption = option;
+//   }
+// });
+// if (!deliveryOption) {
+//   return;
+// }
+
+
  const today = dayjs();
     const deliveryDate = today.add(deliveryOption.deliveryDays,'days');
     const dateString = deliveryDate.format(
