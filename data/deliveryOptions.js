@@ -1,3 +1,6 @@
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+import isSatSun from "../scripts/utils/isWeekend.js";
+
 export const deliveryOptions =[{
     id: '1',
     deliveryDays: 7,
@@ -26,4 +29,19 @@ deliveryOptions.forEach((option)=>{
   }
 });
 return deliveryOption || deliveryOptions[0];
+}
+
+export function calculateDeliveryDate(deliveryOption) {
+  let remainingDays = deliveryOption.deliveryDays;
+  let deliveryDate = dayjs();
+
+  while (remainingDays > 0) {
+    deliveryDate = deliveryDate.add(1, "day");
+
+    if (!isSatSun(deliveryDate)) {
+      remainingDays--;
+    }
+  }
+
+  return deliveryDate;
 }
