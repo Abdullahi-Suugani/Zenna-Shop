@@ -27,6 +27,8 @@
 }
 
 .amazon-logo {
+  display: inline-flex;
+  align-items: center;
   width: 100px;
   margin-top: 12px;
 }
