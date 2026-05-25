@@ -1,4 +1,5 @@
 export let cart;
+import { deliveryOptions } from "./deliveryOptions.js";
 
 loadFromStoage();
 
@@ -93,6 +94,14 @@ export function updateDeliveryOption(productId, deliveryOptionId ){
 
 
   if (!matchingItem) {
+    return;
+  }
+
+  const deliveryOptionExists = deliveryOptions.some((deliveryOption) => {
+    return deliveryOption.id === deliveryOptionId;
+  });
+
+  if (!deliveryOptionExists) {
     return;
   }
 
