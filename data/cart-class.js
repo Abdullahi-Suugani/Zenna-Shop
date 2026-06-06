@@ -4,12 +4,12 @@ class Cart {
 
   constructor(localStorageKey) {
     this.#localStorageKey = localStorageKey;
-    this.loadFromStoage();
+    this.#loadFromStoage();
 
    
   }
 
-  loadFromStoage() {
+  #loadFromStoage() {
     this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if (!this.cartItems) {
@@ -127,7 +127,7 @@ class Cart {
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
 
-cart.#localStorageKey = 'test';
+
 
 console.log(cart);
 console.log(businessCart);
