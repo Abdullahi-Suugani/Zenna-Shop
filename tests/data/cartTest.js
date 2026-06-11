@@ -1,165 +1,135 @@
-import {
-  addToCart,
-  cart,
-  loadFromStoage,
-  removeFromCart,
-  updateDeliveryOption
-} from '../../data/cart.js';
+import { cart } from "../../data/cart-class.js";
 
-describe('test suite: addToCart', () => {
+describe("test suite: addToCart", () => {
   beforeEach(() => {
-    spyOn(localStorage, 'setItem');
+    spyOn(localStorage, "setItem");
   });
 
-  it('adds an existing product to the cart', () => {
-    spyOn(localStorage, 'getItem').and.callFake(() => {
-      return JSON.stringify([{
-        productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+  it("adds an existing product to the cart", () => {
+    cart.cartItems = [
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
         quantity: 1,
-        deliveryOptionId: '1'
-      }]);
-    });
-    loadFromStoage();
+        deliveryOptionId: "1",
+      },
+    ];
 
-    addToCart('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
-    expect(cart.length).toEqual(1);
-    expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
-    expect(cart[0].quantity).toEqual(2);
-    expect(cart[0].deliveryOptionId).toEqual('1');
-    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart));
+    cart.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+
+    expect(cart.cartItems.length).toEqual(1);
+    expect(cart.cartItems[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+    expect(cart.cartItems[0].quantity).toEqual(2);
+    expect(cart.cartItems[0].deliveryOptionId).toEqual("1");
+    expect(localStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify(cart.cartItems));
   });
 
-  it('adds a new product to the cart', () => {
-    spyOn(localStorage, 'getItem').and.callFake(() => {
-      return JSON.stringify([]);
-    });
-    loadFromStoage();
+  it("adds a new product to the cart", () => {
+    cart.cartItems = [];
 
-    addToCart('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
-    expect(cart.length).toEqual(1);
-    expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
-    expect(cart[0].quantity).toEqual(1);
-    expect(cart[0].deliveryOptionId).toEqual('1');
-    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart));
+    cart.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+
+    expect(cart.cartItems.length).toEqual(1);
+    expect(cart.cartItems[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+    expect(cart.cartItems[0].quantity).toEqual(1);
+    expect(cart.cartItems[0].deliveryOptionId).toEqual("1");
+    expect(localStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify(cart.cartItems));
   });
 });
 
-describe('test suite: removeFromCart', () => {
+describe("test suite: removeFromCart", () => {
   beforeEach(() => {
-    spyOn(localStorage, 'setItem');
-    spyOn(localStorage, 'getItem');
+    spyOn(localStorage, "setItem");
   });
 
-  it('removes a product that is in the cart', () => {
-    localStorage.getItem.and.callFake(() => {
-      return JSON.stringify([
-        {
-          productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-          quantity: 2,
-          deliveryOptionId: '1'
-        },
-        {
-          productId: '15b6fc6f-327a-4ec4-896f-486349e85a3d',
-          quantity: 1,
-          deliveryOptionId: '2'
-        }
-      ]);
-    });
-    loadFromStoage();
+  it("removes a product that is in the cart", () => {
+    cart.cartItems = [
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 2,
+        deliveryOptionId: "1",
+      },
+      {
+        productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+        quantity: 1,
+        deliveryOptionId: "2",
+      },
+    ];
 
-    removeFromCart('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
+    cart.removeFromCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
 
-    expect(cart.length).toEqual(1);
-    expect(cart[0].productId).toEqual('15b6fc6f-327a-4ec4-896f-486349e85a3d');
-    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart));
+    expect(cart.cartItems.length).toEqual(1);
+    expect(cart.cartItems[0].productId).toEqual("15b6fc6f-327a-4ec4-896f-486349e85a3d");
+    expect(localStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify(cart.cartItems));
   });
 
-  it('does nothing if product is not in cart', () => {
-    localStorage.getItem.and.callFake(() => {
-      return JSON.stringify([
-        {
-          productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-          quantity: 2,
-          deliveryOptionId: '1'
-        }
-      ]);
-    });
-    loadFromStoage();
+  it("does nothing if product is not in cart", () => {
+    cart.cartItems = [
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 2,
+        deliveryOptionId: "1",
+      },
+    ];
 
-    removeFromCart('not-a-real-product-id');
+    cart.removeFromCart("not-a-real-product-id");
 
-    expect(cart.length).toEqual(1);
-    expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
-    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart));
+    expect(cart.cartItems.length).toEqual(1);
+    expect(cart.cartItems[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+    expect(localStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify(cart.cartItems));
   });
 });
 
-describe('test suite: updateDeliveryOption', () => {
+describe("test suite: updateDeliveryOption", () => {
   beforeEach(() => {
-    spyOn(localStorage, 'setItem');
-    spyOn(localStorage, 'getItem');
+    spyOn(localStorage, "setItem");
   });
 
-  it('updates delivery option of a product in the cart', () => {
-    localStorage.getItem.and.callFake(() => {
-      return JSON.stringify([
-        {
-          productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-          quantity: 2,
-          deliveryOptionId: '1'
-        }
-      ]);
-    });
-    loadFromStoage();
+  it("updates delivery option of a product in the cart", () => {
+    cart.cartItems = [
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 2,
+        deliveryOptionId: "1",
+      },
+    ];
 
-    updateDeliveryOption('e43638ce-6aa0-4b85-b27f-e1d07eb678c6', '3');
+    cart.updateDeliveryOption("e43638ce-6aa0-4b85-b27f-e1d07eb678c6", "3");
 
-    expect(cart.length).toEqual(1);
-    expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
-    expect(cart[0].deliveryOptionId).toEqual('3');
-    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart));
+    expect(cart.cartItems.length).toEqual(1);
+    expect(cart.cartItems[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+    expect(cart.cartItems[0].deliveryOptionId).toEqual("3");
+    expect(localStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify(cart.cartItems));
   });
 
-  it('does nothing if productId does not exist in cart', () => {
-    localStorage.getItem.and.callFake(() => {
-      return JSON.stringify([
-        {
-          productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-          quantity: 2,
-          deliveryOptionId: '1'
-        }
-      ]);
-    });
-    loadFromStoage();
+  it("does nothing if productId does not exist in cart", () => {
+    cart.cartItems = [
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 2,
+        deliveryOptionId: "1",
+      },
+    ];
 
-    updateDeliveryOption('not-a-real-product-id', '3');
+    cart.updateDeliveryOption("not-a-real-product-id", "3");
 
-    expect(cart.length).toEqual(1);
-    expect(cart[0].deliveryOptionId).toEqual('1');
+    expect(cart.cartItems.length).toEqual(1);
+    expect(cart.cartItems[0].deliveryOptionId).toEqual("1");
     expect(localStorage.setItem).not.toHaveBeenCalled();
   });
 
-  it('does nothing if deliveryOptionId does not exist', () => {
-    localStorage.getItem.and.callFake(() => {
-      return JSON.stringify([
-        {
-          productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-          quantity: 2,
-          deliveryOptionId: '1'
-        }
-      ]);
-    });
-    loadFromStoage();
+  it("does nothing if deliveryOptionId does not exist", () => {
+    cart.cartItems = [
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 2,
+        deliveryOptionId: "1",
+      },
+    ];
 
-    updateDeliveryOption('e43638ce-6aa0-4b85-b27f-e1d07eb678c6', '999');
+    cart.updateDeliveryOption("e43638ce-6aa0-4b85-b27f-e1d07eb678c6", "999");
 
-    expect(cart.length).toEqual(1);
-    expect(cart[0].deliveryOptionId).toEqual('1');
+    expect(cart.cartItems.length).toEqual(1);
+    expect(cart.cartItems[0].deliveryOptionId).toEqual("1");
     expect(localStorage.setItem).not.toHaveBeenCalled();
   });
 });

@@ -1,5 +1,5 @@
 
-import { cart, removeFromCart, updateDeliveryOption, updateQuantity } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryOptions.js";
@@ -18,7 +18,7 @@ let cartSummaryHTML = '';
 
 
 
-cart.forEach((cartItem)=> {
+cart.cartItems.forEach((cartItem)=> {
   const productId = cartItem.productId;
 const  matchingProduct = getProduct(productId);
 
@@ -150,7 +150,7 @@ document.querySelectorAll('.js-delete-link')
   link.addEventListener('click',()=>{
     
     const productId = link.dataset.productId;
-    removeFromCart(productId);
+    cart.removeFromCart(productId);
     renderOrderSummary();
     renderPaymentSummary();
     renderCheckoutHeader();
@@ -174,7 +174,7 @@ document.querySelectorAll('.js-save-link')
     const quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
     const newQuantity = Number(quantityInput.value);
 
-    updateQuantity(productId, newQuantity);
+    cart.updateQuantity(productId, newQuantity);
 
     const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
     quantityLabel.innerHTML = newQuantity;
@@ -189,7 +189,7 @@ document.querySelectorAll('.js-delivery-option').forEach((element)=>{
   element.addEventListener('click',()=>{
     const {productId, deliveryOptionId} = element.dataset;
 
-   updateDeliveryOption(productId, deliveryOptionId);
+   cart.updateDeliveryOption(productId, deliveryOptionId);
    renderOrderSummary();
    renderPaymentSummary();
    renderCheckoutHeader();
