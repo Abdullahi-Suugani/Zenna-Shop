@@ -11,12 +11,12 @@ class Car {
 
   displayInfo() {
     const trunkStatus = this.isTrunkOpen ? "open" : "closed";
-    console.log(`${this.#brand} ${this.#model}, Speed: ${this.speed} km/h, Trunk: ${trunkStatus}`);
+    // console.log(`${this.#brand} ${this.#model}, Speed: ${this.speed} km/h, Trunk: ${trunkStatus}`);
   }
 
   go() {
     if (this.isTrunkOpen) {
-      console.log("Close the trunk before driving.");
+      // console.log("Close the trunk before driving.");
       return;
     }
 
@@ -29,7 +29,7 @@ class Car {
 
   openTrunk() {
     if (this.speed > 0) {
-      console.log("Cannot open the trunk while the car is moving.");
+      // console.log("Cannot open the trunk while the car is moving.");
       return;
     }
 
@@ -54,11 +54,11 @@ class RaceCar extends Car {
   }
 
   openTrunk() {
-    console.log("Race cars do not have trunks.");
+    // console.log("Race cars do not have trunks.");
   }
 
   closeTrunk() {
-    console.log("Race cars do not have trunks.");
+    // console.log("Race cars do not have trunks.");
   }
 }
 
@@ -66,8 +66,8 @@ const car1 = new Car("Toyota", "Corolla");
 const car2 = new Car("Tesla", "Model 3");
 const raceCar = new RaceCar("McLaren", "F1", 20);
 
-console.log(car1);
-console.log(car2);
+// console.log(car1);
+// console.log(car2);
 
 car1.displayInfo();
 car1.go();
