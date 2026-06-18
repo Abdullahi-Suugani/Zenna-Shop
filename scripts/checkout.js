@@ -7,6 +7,28 @@ import { loadCart } from "../data/cart.js";
 
 // import '../data/Backend-practice.js';
 
+Promise.all([
+  new Promise((resolve) => {
+  loadProducts(() => {
+    resolve('value1');
+  });
+}),
+
+new Promise((resolve) => {
+      loadCart(() => {
+        resolve('value2');
+      });
+    }),
+
+]).then((values)=>{
+  console.log(values);
+   renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
+
+});
+ 
+/*
 new Promise((resolve) => {
   loadProducts(() => {
     resolve();
@@ -22,6 +44,8 @@ new Promise((resolve) => {
     renderOrderSummary();
     renderPaymentSummary();
   });
+
+  */
 
 /*
 loadProducts(() => {
