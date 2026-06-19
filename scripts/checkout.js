@@ -7,6 +7,17 @@ import { loadCart } from "../data/cart.js";
 
 // import '../data/Backend-practice.js';
 
+function loadpage(){
+console.log("loadpage");
+return 'value1';
+
+}
+loadpage().then(()=>{
+  console.log("loadpage done");
+  console.log(value);
+});
+
+
 Promise.all([
   loadProductsFetch(),
   new Promise((resolve) => {
