@@ -7,17 +7,22 @@ import { loadCart } from "../data/cart.js";
 
 // import '../data/Backend-practice.js';
 
-function loadpage(){
-console.log("loadpage");
-return 'value1';
+async function loadpage() {
+  await loadProductsFetch();
 
+  const value = await new Promise((resolve) => {
+    loadCart(() => {
+      resolve("value2");
+    });
+  });
+
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
 }
-loadpage().then(()=>{
-  console.log("loadpage done");
-  console.log(value);
-});
+loadpage();
 
-
+/*
 Promise.all([
   loadProductsFetch(),
   new Promise((resolve) => {
@@ -31,6 +36,8 @@ Promise.all([
   renderOrderSummary();
   renderPaymentSummary();
 });
+
+*/
 
 /*
 new Promise((resolve) => {
