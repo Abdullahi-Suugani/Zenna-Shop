@@ -1,5 +1,5 @@
 .amazon-header {
-  background-color: rgb(19, 25, 33);
+  background-color: rgb(67, 6, 67);
   color: white;
   padding-left: 15px;
   padding-right: 15px;
@@ -145,7 +145,7 @@
   position: absolute;
   top: 4px;
   left: 22px;
-  
+
   width: 26px;
   text-align: center;
 }
