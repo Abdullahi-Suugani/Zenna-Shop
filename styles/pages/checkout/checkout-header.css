@@ -26,15 +26,36 @@
   width: 150px;
 }
 
-.amazon-logo {
-  display: inline-flex;
-  align-items: center;
-  width: 100px;
-  margin-top: 12px;
+.checkout-header-left-section a {
+  text-decoration: none;
 }
 
-.amazon-mobile-logo {
-  display: none;
+.checkout-zenna-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 100px;
+  margin-top: 12px;
+  color: #4A2E65;
+  line-height: 1;
+}
+
+.checkout-zenna-logo-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: #CDB48F;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.checkout-zenna-logo-text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 /* @media is used to create responsive design (making the
@@ -46,14 +67,18 @@
     width: auto;
   }
 
-  .amazon-logo {
-    display: none;
+  .checkout-zenna-logo {
+    width: 92px;
+    margin-top: 5px;
   }
 
-  .amazon-mobile-logo {
-    display: inline-block;
-    height: 35px;
-    margin-top: 5px;
+  .checkout-zenna-logo-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .checkout-zenna-logo-text {
+    font-size: 24px;
   }
 }
 

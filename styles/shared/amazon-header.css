@@ -1,5 +1,5 @@
 .amazon-header {
-  background-color: rgb(67, 6, 67);
+  background-color: #4A2E65;
   color: white;
   padding-left: 15px;
   padding-right: 15px;
@@ -38,26 +38,46 @@
   border: 1px solid white;
 }
 
-.amazon-logo {
+.zenna-logo {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   width: 100px;
   margin-top: 5px;
+  color: #CDB48F;
+  line-height: 1;
 }
 
-.amazon-mobile-logo {
-  display: none;
+.zenna-logo-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.zenna-logo-text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 @media (max-width: 575px) {
-  .amazon-logo {
-    display: none;
+  .zenna-logo {
+    width: 92px;
   }
 
-  .amazon-mobile-logo {
-    display: block;
-    height: 35px;
-    margin-top: 5px;
+  .zenna-logo-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .zenna-logo-text {
+    font-size: 24px;
   }
 }
 

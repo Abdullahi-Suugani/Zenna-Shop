@@ -1,5 +1,7 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
+const PRODUCTS_API_URL = "http://localhost:3000/api/products";
+
 export function getProduct(productId) {
   let matchingProduct;
 
@@ -109,7 +111,7 @@ object3.method();
 */
 
 export function loadProductsFetch() {
-  const promise = fetch("https://supersimplebackend.dev/products")
+  const promise = fetch(PRODUCTS_API_URL)
     .then((response) => {
       return response.json();
     })
@@ -154,7 +156,7 @@ export function loadProducts(fun) {
     console.log("unexpected error. Please try again later.");
   });
 
-  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.open("GET", PRODUCTS_API_URL);
   xhr.send();
 }
 
