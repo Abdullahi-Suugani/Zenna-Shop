@@ -1,6 +1,6 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
-const PRODUCTS_API_URL = "http://localhost:3000/api/products";
+const PRODUCTS_DATA_URL = "backend/products.json";
 
 export function getProduct(productId) {
   let matchingProduct;
@@ -111,20 +111,12 @@ object3.method();
 */
 
 export function loadProductsFetch() {
-  const promise = fetch(PRODUCTS_API_URL)
+  const promise = fetch(PRODUCTS_DATA_URL)
     .then((response) => {
       return response.json();
     })
     .then((productsData) => {
-      products = productsData.map((productDetails) => {
-        if (productDetails.type === "clothing") {
-          return new Clothing(productDetails);
-        }
-        if (productDetails.type === "appliance") {
-          return new Appliance(productDetails);
-        }
-        return new Product(productDetails);
-      });
+      products = productsData.map(createProduct);
       console.log("load Products");
     })
     .catch((error) => {
@@ -135,19 +127,22 @@ export function loadProductsFetch() {
 }
 
 export let products = [];
+
+function createProduct(productDetails) {
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  }
+  if (productDetails.type === "appliance") {
+    return new Appliance(productDetails);
+  }
+  return new Product(productDetails);
+}
+
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 
   xhr.addEventListener("load", () => {
-    products = JSON.parse(xhr.response).map((productDetails) => {
-      if (productDetails.type === "clothing") {
-        return new Clothing(productDetails);
-      }
-      if (productDetails.type === "appliance") {
-        return new Appliance(productDetails);
-      }
-      return new Product(productDetails);
-    });
+    products = JSON.parse(xhr.response).map(createProduct);
     console.log("load Products");
     fun();
   });
@@ -156,7 +151,7 @@ export function loadProducts(fun) {
     console.log("unexpected error. Please try again later.");
   });
 
-  xhr.open("GET", PRODUCTS_API_URL);
+  xhr.open("GET", PRODUCTS_DATA_URL);
   xhr.send();
 }
 
