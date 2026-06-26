@@ -50,7 +50,7 @@
 
       <a class="cart-link header-link" href="checkout.html">
         <img class="cart-icon" src="images/icons/cart-icon.png">
-        <div class="cart-quantity">3</div>
+        <div class="cart-quantity js-cart-quantity">0</div>
         <div class="cart-text">Cart</div>
       </a>
     </div>
@@ -96,8 +96,13 @@
   <script>
 
     const url = new URL(window.location.href);
-    console.log(url.searchParms.get('orderId'));
-    console.log(url.searchParms.get('productId'));
+    console.log(url.searchParams.get('orderId'));
+    console.log(url.searchParams.get('productId'));
+  </script>
+  <script type="module">
+    import { cart } from './data/cart-class.js';
+
+    document.querySelector('.js-cart-quantity').innerHTML = cart.calculateCartQuantity();
   </script>
 </body>
 

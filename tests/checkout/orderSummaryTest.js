@@ -13,7 +13,7 @@ describe("tests suite: renderOrderSummary", () => {
   });
 
   beforeEach(() => {
-    spyOn(localStorage, "setItem");
+    spyOn(sessionStorage, "setItem");
 
     document.querySelector(".js-test-container").innerHTML = `
       <div class="js-order-summary"></div>
