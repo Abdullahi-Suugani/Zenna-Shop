@@ -21,7 +21,7 @@ export class Cart {
     sessionStorage.setItem(this.#storageKey, JSON.stringify(this.cartItems));
   }
 
-  addToCart(productId) {
+  addToCart(productId, quantity = 1) {
     let matchingItem;
 
     this.cartItems.forEach((cartItem) => {
@@ -31,11 +31,11 @@ export class Cart {
     });
 
     if (matchingItem) {
-      matchingItem.quantity += 1;
+      matchingItem.quantity += quantity;
     } else {
       this.cartItems.push({
         productId,
-        quantity: 1,
+        quantity,
         deliveryOptionId: "1",
       });
     }

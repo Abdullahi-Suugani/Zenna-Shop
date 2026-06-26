@@ -34,6 +34,16 @@ describe("test suite: addToCart", () => {
     expect(cart.cartItems[0].deliveryOptionId).toEqual("1");
     expect(sessionStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify(cart.cartItems));
   });
+
+  it("adds the selected quantity to the cart", () => {
+    cart.cartItems = [];
+
+    cart.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6", 3);
+
+    expect(cart.cartItems.length).toEqual(1);
+    expect(cart.cartItems[0].quantity).toEqual(3);
+    expect(sessionStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify(cart.cartItems));
+  });
 });
 
 describe("test suite: removeFromCart", () => {
