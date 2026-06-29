@@ -3,7 +3,7 @@
   padding-left: 30px;
   padding-right: 30px;
 
-  margin-top: 140px;
+  margin-top: 54px;
   margin-bottom: 100px;
 
   /* margin-left: auto;
@@ -14,10 +14,15 @@
   margin-right: auto;
 }
 
+body {
+  background: #f7f8f7;
+}
+
 .page-title {
   font-weight: 700;
-  font-size: 22px;
-  margin-bottom: 18px;
+  font-size: 28px;
+  margin-bottom: 22px;
+  color: #111111;
 }
 
 .checkout-grid {
@@ -44,9 +49,11 @@
 
 .cart-item-container,
 .payment-summary {
-  border: 1px solid rgb(222, 222, 222);
-  border-radius: 4px;
+  border: 1px solid #d8dddd;
+  border-radius: 7px;
+  background: #ffffff;
   padding: 18px;
+  box-shadow: 0 1px 2px rgba(16, 10, 22, 0.04);
 }
 
 .cart-item-container {
@@ -69,7 +76,7 @@
 }
 
 .delivery-date {
-  color: rgb(0, 118, 0);
+  color: #067d62;
   font-weight: 700;
   font-size: 19px;
   margin-top: 5px;
@@ -110,7 +117,7 @@
 }
 
 .product-price {
-  color: rgb(177, 39, 4);
+  color: #111111;
   font-weight: 700;
   margin-bottom: 5px;
 }
@@ -171,7 +178,7 @@
 }
 
 .delivery-option-date {
-  color: rgb(0, 118, 0);
+  color: #067d62;
   font-weight: 500;
   margin-bottom: 3px;
 }
@@ -211,7 +218,7 @@
 }
 
 .total-row {
-  color: rgb(177, 39, 4);
+  color: #203e4a;
   font-weight: 700;
   font-size: 18px;
 
@@ -223,8 +230,18 @@
   width: 100%;
   padding-top: 12px;
   padding-bottom: 12px;
-  border-radius: 8px;
+  border: 0;
+  border-radius: 999px;
+  background: #203e4a;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18);
 
   margin-top: 11px;
   margin-bottom: 15px;
+}
+
+.place-order-button:hover {
+  background: #172f39;
 }

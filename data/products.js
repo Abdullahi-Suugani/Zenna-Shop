@@ -1,6 +1,7 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
-const PRODUCTS_DATA_URL = "backend/products.json";
+const PRODUCTS_API_URL = "http://localhost:3000/api/products";
+const PRODUCTS_FALLBACK_URL = "/backend/products.json";
 
 export function getProduct(productId) {
   let matchingProduct;
@@ -111,9 +112,22 @@ object3.method();
 */
 
 export function loadProductsFetch() {
-  const promise = fetch(PRODUCTS_DATA_URL)
+  const promise = fetch(PRODUCTS_API_URL)
     .then((response) => {
+      if (!response.ok) {
+        throw new Error("Products request failed.");
+      }
+
       return response.json();
+    })
+    .catch(() => {
+      return fetch(PRODUCTS_FALLBACK_URL).then((response) => {
+        if (!response.ok) {
+          throw new Error("Fallback products request failed.");
+        }
+
+        return response.json();
+      });
     })
     .then((productsData) => {
       products = productsData.map(createProduct);
@@ -142,16 +156,38 @@ export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 
   xhr.addEventListener("load", () => {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      products = JSON.parse(xhr.response).map(createProduct);
+      console.log("load Products");
+      fun();
+      return;
+    }
+
+    loadProductsFromFallback(fun);
+  });
+
+  xhr.addEventListener("error", (error) => {
+    loadProductsFromFallback(fun);
+  });
+
+  xhr.open("GET", PRODUCTS_API_URL);
+  xhr.send();
+}
+
+function loadProductsFromFallback(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("load", () => {
     products = JSON.parse(xhr.response).map(createProduct);
     console.log("load Products");
     fun();
   });
 
-  xhr.addEventListener("error", (error) => {
+  xhr.addEventListener("error", () => {
     console.log("unexpected error. Please try again later.");
   });
 
-  xhr.open("GET", PRODUCTS_DATA_URL);
+  xhr.open("GET", PRODUCTS_FALLBACK_URL);
   xhr.send();
 }
 

@@ -13,6 +13,30 @@ app.use(express.json());
 
 let productsCollection;
 
+const allowedProductUpdateFields = new Set([
+  "image",
+  "name",
+  "rating",
+  "priceCents",
+  "keywords",
+  "type",
+  "sizeChartLink",
+  "instructionsLink",
+  "warrantyLink",
+]);
+
+function buildProductUpdate(productUpdates) {
+  const update = {};
+
+  Object.entries(productUpdates).forEach(([field, value]) => {
+    if (allowedProductUpdateFields.has(field)) {
+      update[field] = value;
+    }
+  });
+
+  return update;
+}
+
 async function connectDatabase() {
   const client = new MongoClient(mongoUri);
   await client.connect();
@@ -33,6 +57,36 @@ app.get("/api/products", async (req, res) => {
   } catch (error) {
     console.error("Failed to load products:", error);
     res.status(500).json({ message: "Failed to load products." });
+  }
+});
+
+app.patch("/api/products/:id", async (req, res) => {
+  try {
+    const productUpdates = buildProductUpdate(req.body);
+
+    if (Object.keys(productUpdates).length === 0) {
+      return res.status(400).json({
+        message: "Send at least one valid product field to update.",
+      });
+    }
+
+    const result = await productsCollection.findOneAndUpdate(
+      { id: req.params.id },
+      { $set: productUpdates },
+      {
+        projection: { _id: 0 },
+        returnDocument: "after",
+      }
+    );
+
+    if (!result) {
+      return res.status(404).json({ message: "Product not found." });
+    }
+
+    res.json(result);
+  } catch (error) {
+    console.error("Failed to update product:", error);
+    res.status(500).json({ message: "Failed to update product." });
   }
 });
 

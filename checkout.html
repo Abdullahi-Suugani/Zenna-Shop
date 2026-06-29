@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <title>Checkout</title>
 
   <!-- This code is needed for responsive design to work.
@@ -16,34 +17,28 @@
 
   <!-- Here are the CSS files for this page. -->
   <link rel="stylesheet" href="styles/shared/general.css">
+  <link rel="stylesheet" href="styles/shared/amazon-header.css">
   <link rel="stylesheet" href="styles/pages/checkout/checkout-header.css">
   <link rel="stylesheet" href="styles/pages/checkout/checkout.css">
 </head>
 
 <body>
-  <div class="checkout-header">
-    <div class="header-content">
-      <div class="checkout-header-left-section">
-        <a href="index.html">
-          <span class="checkout-zenna-logo" aria-label="Zenna home">
-            <svg class="checkout-zenna-logo-icon" viewBox="0 0 32 32" aria-hidden="true">
-              <path d="M16 3L28 10V22L16 29L4 22V10L16 3Z"></path>
-              <path d="M10 12H22L10 20H22"></path>
-            </svg>
-            <span class="checkout-zenna-logo-text">Zenna</span>
-          </span>
-        </a>
-      </div>
+  <header class="site-header">
+    <nav class="site-nav checkout-nav" aria-label="Primary navigation">
+      <a class="brand-link" href="index.html" aria-label="Zenna home">Zenna</a>
 
       <div class="checkout-header-middle-section">
         Checkout (<a class="return-to-home-link js-return-to-home-link" href="index.html"></a>)
       </div>
 
-      <div class="checkout-header-right-section">
-        <img src="images/icons/checkout-lock-icon.png">
+      <div class="nav-actions checkout-actions">
+        <a class="nav-link" href="index.html">Keep shopping</a>
+        <span class="checkout-lock" aria-label="Secure checkout">
+          <img src="images/icons/checkout-lock-icon.png" alt="">
+        </span>
       </div>
-    </div>
-  </div>
+    </nav>
+  </header>
 
   <div class="main">
     <div class="page-title">Review your order</div>

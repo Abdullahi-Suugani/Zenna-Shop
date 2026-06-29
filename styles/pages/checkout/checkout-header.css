@@ -1,130 +1,50 @@
-.checkout-header {
-  height: 60px;
-  padding-left: 30px;
-  padding-right: 30px;
-  background-color: white;
-
-  display: flex;
-  justify-content: center;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
-
-.header-content {
-  width: 100%;
-  max-width: 1100px;
-
-  display: flex;
-  align-items: center;
-}
-
-.checkout-header-left-section {
-  width: 150px;
-}
-
-.checkout-header-left-section a {
-  text-decoration: none;
-}
-
-.checkout-zenna-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  width: 100px;
-  margin-top: 12px;
-  color: #4A2E65;
-  line-height: 1;
-}
-
-.checkout-zenna-logo-icon {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  fill: none;
-  stroke: #CDB48F;
-  stroke-width: 2;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-
-.checkout-zenna-logo-text {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
-/* @media is used to create responsive design (making the
-   website look good on any screen size). This @media
-   means when the screen width is 575px or less, different
-   styles (inside the {...}) will be applied. */
-@media (max-width: 575px) {
-  .checkout-header-left-section {
-    width: auto;
-  }
-
-  .checkout-zenna-logo {
-    width: 92px;
-    margin-top: 5px;
-  }
-
-  .checkout-zenna-logo-icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .checkout-zenna-logo-text {
-    font-size: 24px;
-  }
+.checkout-nav {
+  grid-template-columns: minmax(150px, 220px) minmax(260px, 1fr) minmax(220px, 320px);
 }
 
 .checkout-header-middle-section {
-  flex: 1;
-  flex-shrink: 0;
-  text-align: center;
-
-  font-size: 25px;
-  font-weight: 500;
-
   display: flex;
   justify-content: center;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .return-to-home-link {
-  color: rgb(0, 113, 133);
-  font-size: 23px;
+  color: #cdb48f;
   text-decoration: none;
-  cursor: pointer;
 }
 
-@media (max-width: 1000px) {
+.return-to-home-link:hover {
+  text-decoration: underline;
+}
+
+.checkout-actions {
+  gap: 18px;
+}
+
+.checkout-lock {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.checkout-lock img {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 900px) {
+  .checkout-nav {
+    grid-template-columns: 1fr;
+  }
+
   .checkout-header-middle-section {
+    justify-content: flex-start;
     font-size: 20px;
-    margin-right: 60px;
-  }
-
-  .return-to-home-link {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 575px) {
-  .checkout-header-middle-section {
-    margin-right: 5px;
-  }
-}
-
-.checkout-header-right-section {
-  text-align: right;
-  width: 150px;
-}
-
-@media (max-width: 1000px) {
-  .checkout-header-right-section {
-    width: auto;
   }
 }

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <title>Orders</title>
 
   <!-- This code is needed for responsive design to work.
@@ -21,40 +22,38 @@
 </head>
 
 <body>
-  <div class="amazon-header">
-    <div class="amazon-header-left-section">
-      <a href="index.html" class="header-link">
-        <span class="zenna-logo" aria-label="Zenna home">
-          <svg class="zenna-logo-icon" viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M16 3L28 10V22L16 29L4 22V10L16 3Z"></path>
-            <path d="M10 12H22L10 20H22"></path>
-          </svg>
-          <span class="zenna-logo-text">Zenna</span>
-        </span>
-      </a>
-    </div>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="brand-link" href="index.html" aria-label="Zenna home">Zenna</a>
 
-    <div class="amazon-header-middle-section">
-      <input class="search-bar" type="text" placeholder="Search">
+      <form class="search-form" role="search">
+        <label class="visually-hidden" for="orders-search">Search Zenna products</label>
+        <input
+          id="orders-search"
+          class="search-input"
+          type="search"
+          placeholder="Search premium essentials..."
+        >
+        <button class="search-submit" type="submit" aria-label="Search">
+          <span class="search-symbol" aria-hidden="true"></span>
+        </button>
+      </form>
 
-      <button class="search-button">
-        <img class="search-icon" src="images/icons/search-icon.png">
-      </button>
-    </div>
-
-    <div class="amazon-header-right-section">
-      <a class="orders-link header-link" href="orders.html">
-        <span class="returns-text">Returns</span>
-        <span class="orders-text">& Orders</span>
-      </a>
-
-      <a class="cart-link header-link" href="checkout.html">
-        <img class="cart-icon" src="images/icons/cart-icon.png">
-        <div class="cart-quantity js-cart-quantity">0</div>
-        <div class="cart-text">Cart</div>
-      </a>
-    </div>
-  </div>
+      <div class="nav-actions">
+        <a class="nav-link" href="index.html">Shop</a>
+        <a class="nav-link account-link" href="#">
+          <span class="account-icon" aria-hidden="true"></span>
+          <span>Account</span>
+        </a>
+        <a class="nav-link" href="orders.html">Returns &amp; Orders</a>
+        <a class="cart-link" href="checkout.html" aria-label="Cart">
+          <span class="cart-icon" aria-hidden="true"></span>
+          <span class="cart-badge js-cart-quantity">0</span>
+          <span>Cart</span>
+        </a>
+      </div>
+    </nav>
+  </header>
 
   <div class="main">
     <div class="page-title">Your Orders</div>
