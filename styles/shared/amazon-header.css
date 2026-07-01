@@ -1,7 +1,15 @@
 .site-header {
   background:
-    radial-gradient(circle at 18% 0%, rgba(205, 180, 143, 0.16), transparent 28%),
-    radial-gradient(circle at 76% 38%, rgba(255, 255, 255, 0.09), transparent 24%),
+    radial-gradient(
+      circle at 18% 0%,
+      rgba(205, 180, 143, 0.16),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 76% 38%,
+      rgba(255, 255, 255, 0.09),
+      transparent 24%
+    ),
     linear-gradient(135deg, #170d22 0%, #2e1a3f 42%, #16091f 100%);
   box-shadow: 0 2px 18px rgba(16, 10, 22, 0.35);
   color: #ffffff;
@@ -9,7 +17,10 @@
 
 .site-nav {
   display: grid;
-  grid-template-columns: minmax(150px, 220px) minmax(260px, 620px) minmax(280px, 1fr);
+  grid-template-columns: minmax(150px, 220px) minmax(260px, 620px) minmax(
+      150px,
+      1fr
+    );
   align-items: center;
   column-gap: 24px;
   min-height: 100px;
@@ -97,41 +108,10 @@
   white-space: nowrap;
 }
 
-.account-link,
 .cart-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-}
-
-.account-icon {
-  position: relative;
-  width: 17px;
-  height: 20px;
-}
-
-.account-icon::before,
-.account-icon::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  border: 2px solid #ffffff;
-  transform: translateX(-50%);
-}
-
-.account-icon::before {
-  top: 0;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-}
-
-.account-icon::after {
-  bottom: 0;
-  width: 14px;
-  height: 8px;
-  border-bottom: 0;
-  border-radius: 10px 10px 0 0;
 }
 
 .cart-link {
